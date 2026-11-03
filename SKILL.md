@@ -1,5 +1,5 @@
 ---
-name: fj-skill
+name: fj
 description: >-
   Forgejo CLI (fj) wrapper. Forward any fj subcommand, especially repository‑related operations like listing repositories, creating pull requests, fetching issues, merging branches, managing issue labels, and linking issues. This is not useful for the user to invoke this skill directly. Agent should call this skill when interacting with Forgejo repositories via CLI — creating PRs, managing issues, releases, or CI status — or any time you'd reach for `gh` but the repo's remote is a Forgejo or Gitea host rather than GitHub.
 metadata:
@@ -10,16 +10,16 @@ metadata:
 This skill is a thin wrapper around the official `fj` command‑line client. It forwards any arguments you provide to the underlying `fj` binary and returns the raw output verbatim.
 
 ## How to use it
-1. Invoke this skill by name: `fj-cli`.
-2. Provide the fj subcommand and its flags exactly as you would on the shell. For example:
+1. Invoke this skill by name: `fj`.
+2. Provide the fj subcommand and its flags exactly as you would on the shell, starting with `fj`. For example:
    ```
-   fj-cli repo list
-   fj-cli pr create --source feature/foo --target main \
+   fj repo list
+   fj pr create --source feature/foo --target main \
      --title "Add new feature" \
      --description "$(cat /tmp/desc.md)"
-   fj-cli issue assign 42 alice bob
+   fj issue assign 42 alice bob
    ```
-3. The skill will prepend `fj` if you omitted it, execute the command using the `tools.shell` tool, and return only the standard output.
+3. The skill executes the command using the `tools.shell` tool and returns only the standard output.
 4. No additional commentary or formatting is added.
 
 ## Assumptions
